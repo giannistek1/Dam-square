@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6ec50053e5dd44d94abd66a60f8b11, type: 3}
+  m_Name: Bush 2
+  m_EditorClassIdentifier: 
+  category: 6
+  name: Struik 2
+  thumbnail: {fileID: 21300000, guid: 4332c81c625662f4a9b4c9a1866ce666, type: 3}
+  prefab: {fileID: 5620531897629410093, guid: 79c73233713ca41eba0925b7307a4760, type: 3}

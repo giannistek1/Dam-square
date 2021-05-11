@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd6ec50053e5dd44d94abd66a60f8b11, type: 3}
+  m_Name: Garbage Bin 03
+  m_EditorClassIdentifier: 
+  category: 5
+  name: Afvalbak 2
+  thumbnail: {fileID: 21300000, guid: 3a2679f349e21d6468a610346c34f786, type: 3}
+  prefab: {fileID: 2241413462592900125, guid: e1eb17353abb4f74aa6edfb9ac918ef2, type: 3}
