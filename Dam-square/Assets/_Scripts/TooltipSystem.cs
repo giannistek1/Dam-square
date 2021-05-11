@@ -20,11 +20,11 @@ public class TooltipSystem : MonoBehaviour
     public static void Show(string content, string header = "")
     {
         current.tooltip.setText(content, header);
-        current.tooltip.gameObject.SetActive(true);
+        current.tooltip.Show();
     }
 
     public static void Hide()
     {
-        current.tooltip.gameObject.SetActive(false);
+        current.tooltip.Hide();
     }
 }

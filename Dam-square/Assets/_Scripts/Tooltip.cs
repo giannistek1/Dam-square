@@ -13,12 +13,13 @@ public class Tooltip : MonoBehaviour
     public TextMeshProUGUI headerField;
     public TextMeshProUGUI contentField;
     public LayoutElement layoutElement;
-
     public RectTransform rectTransform;
-
+    public CanvasGroup canvasGroup;
+    
     private void Awake()
     {
         rectTransform = GetComponent<RectTransform>();
+        canvasGroup = GetComponent<CanvasGroup>();
     }
 
     public void setText(string content, string header = "")
@@ -49,5 +50,15 @@ public class Tooltip : MonoBehaviour
 
         rectTransform.pivot = new Vector2(pivotX, pivotY);
         transform.position = position;
+    }
+
+    public void Show()
+    {
+        canvasGroup.alpha = 1f;
+    }
+
+    public void Hide()
+    {
+        canvasGroup.alpha = 0f;
     }
 }
