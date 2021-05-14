@@ -71,4 +71,12 @@ public class PlacingState : MonoBehaviour
             //Debug.Log(placable);
         }
     }
+    
+    void OnMouseEnter() {
+        print("Mouse over object");
+    }
+    
+    void OnMouseExit() {
+    
+    }
 }

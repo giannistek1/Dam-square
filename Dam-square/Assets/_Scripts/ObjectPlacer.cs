@@ -39,6 +39,8 @@ public class ObjectPlacer : MonoBehaviour
 
     void Update()
     {
+       
+        
         // If has object
         if (currentPlacableObject != null)
         {
@@ -50,8 +52,10 @@ public class ObjectPlacer : MonoBehaviour
                 bottomNavigation.SetActive(true);
             }
         }
-        
-        HandleSelectExistingObject();
+        else
+        {
+            HandleSelectExistingObject();
+        }
     }
 
     void FixedUpdate()
