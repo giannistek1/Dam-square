@@ -1,200 +1,201 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPlacer : MonoBehaviour
+namespace _Scripts
 {
-    #region Singleton
-    public static ObjectPlacer instance;
-    public static ObjectPlacer Instance
+    public class ObjectPlacer : MonoBehaviour
     {
-        get { return instance; }
-    }
-    #endregion
-
-    public GameObject currentPlacableObject;
-    public GameObject bottomNavigation;
-
-    [SerializeField] private bool rotateFromMouseWheel;
-    [SerializeField] private bool rotateFromKeybindings;
-    [SerializeField] private KeyCode rotateLeft;
-    [SerializeField] private KeyCode rotateRight;
-    [SerializeField] private float rotationSpeed;
-
-    [SerializeField] private Transform container;
-
-    float mouseWheelRotation;
-
-    private void Awake()
-    {
-        if (instance != null)
+        #region Singleton
+        public static ObjectPlacer instance;
+        public static ObjectPlacer Instance
         {
-            Destroy(this.gameObject);
+            get { return instance; }
         }
-        else
-        {
-            instance = this;
-        }
-    }
+        #endregion
 
-    void Update()
-    {
+        public GameObject currentPlaceableObject;
+        public GameObject bottomNavigation;
+
+        [SerializeField] private bool rotateFromMouseWheel;
+        [SerializeField] private bool rotateFromKeybindings;
+        [SerializeField] private KeyCode rotateLeft;
+        [SerializeField] private KeyCode rotateRight;
+        [SerializeField] private float rotationSpeed;
+
+        [SerializeField] private Transform container;
+
+        float mouseWheelRotation;
+
+        private void Awake()
+        {
+            if (instance != null)
+            {
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                instance = this;
+            }
+        }
+
+        void Update()
+        {
        
         
-        // If has object
-        if (currentPlacableObject != null)
-        {
-            ReleaseGameobjectWhenClicked();
-
-            if (Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace))
+            // If has object
+            if (currentPlaceableObject != null)
             {
-                Destroy(currentPlacableObject);
-                bottomNavigation.SetActive(true);
-            }
-        }
-        else
-        {
-            HandleSelectExistingObject();
-        }
-    }
+                ReleaseGameobjectWhenClicked();
 
-    void FixedUpdate()
-    {
-        if (currentPlacableObject != null)
-        {
-            MoveCurrentObjectToMouse();
-            RotateFromMouseWheel();
-            RotateFromKeybindings();
-        }
-    }
-
-    public void CleanScene()
-    {
-        if (container.childCount > 0)
-            foreach (Transform child in container)
-            {
-                Destroy(child.gameObject);
-            }
-    }
-
-    private void ReleaseGameobjectWhenClicked()
-    {
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (currentPlacableObject.GetComponent<PlacingState>().placable)
-            {
-                PlaceObject();
-            }
-        }
-    }
-
-    private void PlaceObject()
-    {
-        print("Object placed!");
-        // Use reference instead of getcomponent to optimize
-        currentPlacableObject.GetComponent<PlacingState>().placed = true;
-        currentPlacableObject.GetComponent<Collider>().isTrigger = false;
-        currentPlacableObject.GetComponent<Rigidbody>().isKinematic = false;
-        currentPlacableObject.GetComponent<Rigidbody>().useGravity = true;
-
-        currentPlacableObject.gameObject.layer = LayerMask.NameToLayer("Placable");
-        currentPlacableObject.transform.SetParent(container);
-
-        currentPlacableObject = null;
-        bottomNavigation.SetActive(true);
-    }
-
-    private void MakeObjectPlacable()
-    {
-        print("Picking up object");
-        currentPlacableObject.GetComponent<PlacingState>().placed = false;
-        currentPlacableObject.GetComponent<Collider>().isTrigger = true;
-        currentPlacableObject.GetComponent<Rigidbody>().isKinematic = true;
-        currentPlacableObject.GetComponent<Rigidbody>().useGravity = false;
-
-        currentPlacableObject.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
-    }
-
-    private void RotateFromMouseWheel()
-    {
-        if (rotateFromMouseWheel)
-        {
-            mouseWheelRotation += Input.mouseScrollDelta.y;
-            currentPlacableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
-        }
-    }
-
-    private void RotateFromKeybindings()
-    {
-        if (rotateFromKeybindings)
-        {
-            if (Input.GetKey(rotateLeft))
-            {
-                currentPlacableObject.transform.Rotate(-Vector3.up * rotationSpeed * Time.deltaTime);
-            }
-            else if (Input.GetKey(rotateRight))
-            {
-                currentPlacableObject.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
-            }
-            // currentPlacableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
-        }
-
-    }
-
-    private void MoveCurrentObjectToMouse()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hitInfo;
-
-        if (Physics.Raycast(ray, out hitInfo))
-        {
-            //Vector3 objectBounds = currentPlacableObject.GetComponentInChildren<Renderer>().bounds.max;
-            currentPlacableObject.transform.position = new Vector3(hitInfo.point.x, 0.5f, hitInfo.point.z);
-
-            // if (currentPlacableObject.GetComponent<PlacingState>().placable)
-            //     currentPlacableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
-
-            // else
-            //     currentPlacableObject.transform.rotation = Quaternion.identity;
-        }
-    }
-
-    public void HandleNewObject(GameObject newObject)
-    {
-        if (currentPlacableObject != null)
-        {
-            Destroy(currentPlacableObject);
-        }
-        else
-        {
-            currentPlacableObject = Instantiate(newObject);
-            bottomNavigation.SetActive(false);
-        }
-    }
-
-    private void HandleSelectExistingObject()
-    {
-        if (currentPlacableObject == null)
-        {
-            if (!Input.GetMouseButtonDown(0)) return;
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            LayerMask mask = LayerMask.GetMask("Placable");
-            RaycastHit hitInfo;
-
-            if (Physics.Raycast(ray, out hitInfo, mask))
-            {
-                if (hitInfo.collider.gameObject.CompareTag("Placable"))
+                if (Input.GetKeyDown(KeyCode.Delete) || Input.GetKeyDown(KeyCode.Backspace))
                 {
-                    currentPlacableObject = hitInfo.collider.gameObject;
-                    MakeObjectPlacable();
+                    Destroy(currentPlaceableObject);
+                    bottomNavigation.SetActive(true);
+                }
+            }
+            else
+            {
+                HandleSelectExistingObject();
+            }
+        }
+
+        void FixedUpdate()
+        {
+            if (currentPlaceableObject != null)
+            {
+                MoveCurrentObjectToMouse();
+                RotateFromMouseWheel();
+                RotateFromKeybindings();
+            }
+        }
+
+        private void ReleaseGameobjectWhenClicked()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (currentPlaceableObject.GetComponent<PlacingState>().placeable)
+                {
+                    PlaceObject();
                 }
             }
         }
-    }
 
-    private void OnDestroy()
-    {
-        StopAllCoroutines();
+        private void PlaceObject()
+        {
+            print("Object placed!");
+            // Use reference instead of getcomponent to optimize
+            currentPlaceableObject.GetComponent<PlacingState>().placed = true;
+            currentPlaceableObject.GetComponent<Collider>().isTrigger = false;
+            currentPlaceableObject.GetComponent<Rigidbody>().isKinematic = false;
+            currentPlaceableObject.GetComponent<Rigidbody>().useGravity = true;
+
+            currentPlaceableObject.gameObject.layer = LayerMask.NameToLayer("Placeable");
+            currentPlaceableObject.transform.SetParent(container);
+
+            currentPlaceableObject = null;
+            bottomNavigation.SetActive(true);
+        }
+
+        private void MakeObjectPlaceable()
+        {
+            print("Picking up object");
+            currentPlaceableObject.GetComponent<PlacingState>().placed = false;
+            currentPlaceableObject.GetComponent<Collider>().isTrigger = true;
+            currentPlaceableObject.GetComponent<Rigidbody>().isKinematic = true;
+            currentPlaceableObject.GetComponent<Rigidbody>().useGravity = false;
+
+            currentPlaceableObject.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+        }
+
+        private void RotateFromMouseWheel()
+        {
+            if (rotateFromMouseWheel)
+            {
+                mouseWheelRotation += Input.mouseScrollDelta.y;
+                currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
+            }
+        }
+
+        private void RotateFromKeybindings()
+        {
+            if (rotateFromKeybindings)
+            {
+                if (Input.GetKey(rotateLeft))
+                {
+                    currentPlaceableObject.transform.Rotate(-Vector3.up * rotationSpeed * Time.deltaTime);
+                }
+                else if (Input.GetKey(rotateRight))
+                {
+                    currentPlaceableObject.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+                }
+                // currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
+            }
+
+        }
+
+        private void MoveCurrentObjectToMouse()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hitInfo;
+
+            if (Physics.Raycast(ray, out hitInfo))
+            {
+                //Vector3 objectBounds = currentPlaceableObject.GetComponentInChildren<Renderer>().bounds.max;
+                currentPlaceableObject.transform.position = new Vector3(hitInfo.point.x, 0.5f, hitInfo.point.z);
+
+                // if (currentPlaceableObject.GetComponent<PlacingState>().placeable)
+                //     currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);
+
+                // else
+                //     currentPlaceableObject.transform.rotation = Quaternion.identity;
+            }
+        }
+
+        public void HandleNewObject(GameObject newObject)
+        {
+            if (currentPlaceableObject != null)
+            {
+                Destroy(currentPlaceableObject);
+            }
+            else
+            {
+                currentPlaceableObject = Instantiate(newObject);
+                bottomNavigation.SetActive(false);
+            }
+        }
+
+        private void HandleSelectExistingObject()
+        {
+            if (currentPlaceableObject == null)
+            {
+                if (!Input.GetMouseButtonDown(0)) return;
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                LayerMask mask = LayerMask.GetMask("Placeable");
+                RaycastHit hitInfo;
+
+                if (Physics.Raycast(ray, out hitInfo, mask))
+                {
+                    if (hitInfo.collider.gameObject.CompareTag("Placeable"))
+                    {
+                        currentPlaceableObject = hitInfo.collider.gameObject;
+                        MakeObjectPlaceable();
+                    }
+                }
+            }
+        }
+    
+        public void CleanScene()
+        {
+            if (container.childCount > 0)
+                foreach (Transform child in container)
+                {
+                    Destroy(child.gameObject);
+                }
+        }
+
+        private void OnDestroy()
+        {
+            StopAllCoroutines();
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Scripts;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class SelectorListControl : MonoBehaviour
     public GameObject objectSelectorPrefab;
     public GameObject scrollRect;
 
-    [SerializeField] PlacableObject[] placableObjects;
+    [SerializeField] PlaceableObject[] placableObjects;
     private List<GameObject> allObjectSelectors;
     #endregion
 
@@ -22,7 +23,7 @@ public class SelectorListControl : MonoBehaviour
         for (int i = 0; i < placableObjects.Length; i++)
         {
             GameObject newObject = Instantiate(objectSelectorPrefab);
-            newObject.GetComponent<ObjectSelector>().placableObject = placableObjects[i];
+            newObject.GetComponent<ObjectSelector>().placeableObject = placableObjects[i];
             newObject.transform.SetParent(gameObject.transform);
             allObjectSelectors.Add(newObject);
         }
@@ -31,7 +32,7 @@ public class SelectorListControl : MonoBehaviour
 
     public void Filter(ToggleButton toggleButton)
     {
-        List<GameObject> newList = allObjectSelectors.Where(o => o.GetComponent<ObjectSelector>().placableObject.category == toggleButton.objectCategory).ToList();
+        List<GameObject> newList = allObjectSelectors.Where(o => o.GetComponent<ObjectSelector>().placeableObject.category == toggleButton.objectCategory).ToList();
 
         HideAllSelectors();
 

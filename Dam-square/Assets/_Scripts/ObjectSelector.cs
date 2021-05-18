@@ -1,25 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ObjectSelector : MonoBehaviour
 {
-    [HideInInspector] public PlacableObject placableObject;
+    [HideInInspector] public PlaceableObject placeableObject;
 
     [SerializeField] Image thumbnail;
     public TooltipTrigger tooltipTrigger;
 
     void Start()
     {
-        thumbnail.sprite = placableObject.thumbnail;
-        tooltipTrigger.header = placableObject.name;
+        thumbnail.sprite = placeableObject.thumbnail;
+        tooltipTrigger.header = placeableObject.name;
     }
 
     public void OnClick()
     {
-        ObjectPlacer.instance.HandleNewObject(placableObject.prefab);
+        ObjectPlacer.instance.HandleNewObject(placeableObject.prefab);
         tooltipTrigger.HideTooltip();
     }
 }

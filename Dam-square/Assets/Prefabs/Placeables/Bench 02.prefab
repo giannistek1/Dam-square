@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8107851889720878289}
   m_Layer: 2
   m_Name: Bench 02
-  m_TagString: Placable
+  m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

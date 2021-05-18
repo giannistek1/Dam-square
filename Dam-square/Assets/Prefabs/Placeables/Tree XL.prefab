@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9186892852667485648}
   m_Layer: 2
   m_Name: Tree XL
-  m_TagString: Placable
+  m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

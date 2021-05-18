@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7605893056319368808}
   m_Layer: 2
   m_Name: Bush 1
-  m_TagString: Placable
+  m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

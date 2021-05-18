@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8459876555700823296}
   m_Layer: 2
   m_Name: Bike Rack 02
-  m_TagString: Placable
+  m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

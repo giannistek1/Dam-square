@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlacingState : MonoBehaviour
 {
-    public bool placable = true;
+    public bool placeable = true;
     public bool placed = false;
 
     [SerializeField] Material canNotBePlacedMat;
@@ -28,47 +28,70 @@ public class PlacingState : MonoBehaviour
             if (canNotBePlacedMat != null)
                 canNotBePlacedMats[i] = canNotBePlacedMat;
         }
+        
+        if (canNotBePlacedMat != null)
+        {
+            renderer.materials = canNotBePlacedMats;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!placed && other.gameObject.CompareTag("Placable"))
+        if (!placed && other.gameObject.CompareTag("Placeable"))
         {
-            placable = false;
+            placeable = false;
 
             if (canNotBePlacedMat != null)
             {
                 renderer.materials = canNotBePlacedMats;
             }
+            //Debug.Log(placeable);
+        }
 
-            //Debug.Log(placable);
+        if (!placed && other.gameObject.CompareTag("Dropzone"))
+        {
+            print("Dropzone entered");
+            placeable = true;
+
+            renderer.materials = standardMaterials;
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!placed && other.gameObject.CompareTag("Placable"))
+        if (!placed && other.gameObject.CompareTag("Placeable"))
         {
-            placable = true;
+            placeable = true;
 
             renderer.materials = standardMaterials;
 
-            //Debug.Log(placable);
+            //Debug.Log(placeable);
         }
-
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (!placed && other.gameObject.CompareTag("Placable"))
+        
+        if (!placed && other.gameObject.CompareTag("Dropzone"))
         {
-            placable = false;
+            placeable = false;
 
             if (canNotBePlacedMat != null)
             {
                 renderer.materials = canNotBePlacedMats;
             }
-            //Debug.Log(placable);
+
+            //Debug.Log(placeable);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (!placed && other.gameObject.CompareTag("Placeable"))
+        {
+            placeable = false;
+
+            if (canNotBePlacedMat != null)
+            {
+                renderer.materials = canNotBePlacedMats;
+            }
+            //Debug.Log(placeable);
         }
     }
     
