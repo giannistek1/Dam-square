@@ -1,11 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AssetImporters;
 using UnityEngine;
 
 public class PlacingState : MonoBehaviour
 {
-    public bool placeable = true;
+    public bool placeable = false;
     public bool placed = false;
+    public bool withinObject = false;
+    public Transform[] collisionPoints;
 
     [SerializeField] Material canNotBePlacedMat;
 
@@ -47,35 +50,16 @@ public class PlacingState : MonoBehaviour
             }
             //Debug.Log(placeable);
         }
-
-        if (!placed && other.gameObject.CompareTag("Dropzone"))
-        {
-            print("Dropzone entered");
-            placeable = true;
-
-            renderer.materials = standardMaterials;
-        }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (!placed && other.gameObject.CompareTag("Placeable"))
         {
+            withinObject = false;
             placeable = true;
 
             renderer.materials = standardMaterials;
-
-            //Debug.Log(placeable);
-        }
-        
-        if (!placed && other.gameObject.CompareTag("Dropzone"))
-        {
-            placeable = false;
-
-            if (canNotBePlacedMat != null)
-            {
-                renderer.materials = canNotBePlacedMats;
-            }
 
             //Debug.Log(placeable);
         }
@@ -85,6 +69,7 @@ public class PlacingState : MonoBehaviour
     {
         if (!placed && other.gameObject.CompareTag("Placeable"))
         {
+            withinObject = true;
             placeable = false;
 
             if (canNotBePlacedMat != null)
@@ -93,10 +78,30 @@ public class PlacingState : MonoBehaviour
             }
             //Debug.Log(placeable);
         }
+        else if (!placed && !withinObject && other.gameObject.CompareTag("Dropzone"))
+        {
+            foreach (Transform collisionpoint in collisionPoints)
+            {
+                if (!collisionpoint.GetComponent<CollisionPoint>().isInDropzone)
+                {
+                    placeable = false;
+
+                    if (canNotBePlacedMat != null)
+                    {
+                        renderer.materials = canNotBePlacedMats;
+                    }
+                    return;
+                }
+            }
+            placeable = true;
+
+            renderer.materials = standardMaterials;
+        }
+
     }
     
     void OnMouseEnter() {
-        print("Mouse over object");
+        //print("Mouse over object");
     }
     
     void OnMouseExit() {

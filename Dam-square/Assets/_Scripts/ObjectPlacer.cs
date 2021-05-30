@@ -5,7 +5,7 @@ namespace _Scripts
     public class ObjectPlacer : MonoBehaviour
     {
         #region Singleton
-        public static ObjectPlacer instance;
+        private static ObjectPlacer instance;
         public static ObjectPlacer Instance
         {
             get { return instance; }
@@ -39,8 +39,6 @@ namespace _Scripts
 
         void Update()
         {
-       
-        
             // If has object
             if (currentPlaceableObject != null)
             {
@@ -50,6 +48,7 @@ namespace _Scripts
                 {
                     Destroy(currentPlaceableObject);
                     bottomNavigation.SetActive(true);
+                    TutorialManager.Instance.AddObjectDeletionTutorialStep();
                 }
             }
             else
@@ -81,7 +80,6 @@ namespace _Scripts
 
         private void PlaceObject()
         {
-            print("Object placed!");
             // Use reference instead of getcomponent to optimize
             currentPlaceableObject.GetComponent<PlacingState>().placed = true;
             currentPlaceableObject.GetComponent<Collider>().isTrigger = false;
@@ -93,17 +91,19 @@ namespace _Scripts
 
             currentPlaceableObject = null;
             bottomNavigation.SetActive(true);
+            TutorialManager.Instance.AddDropzoneTutorialStep();
         }
 
         private void MakeObjectPlaceable()
         {
-            print("Picking up object");
+            //print("Picking up object");
             currentPlaceableObject.GetComponent<PlacingState>().placed = false;
             currentPlaceableObject.GetComponent<Collider>().isTrigger = true;
             currentPlaceableObject.GetComponent<Rigidbody>().isKinematic = true;
             currentPlaceableObject.GetComponent<Rigidbody>().useGravity = false;
 
             currentPlaceableObject.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
+            TutorialManager.Instance.AddObjectSelectionTutorialStep();
         }
 
         private void RotateFromMouseWheel()
@@ -122,10 +122,12 @@ namespace _Scripts
                 if (Input.GetKey(rotateLeft))
                 {
                     currentPlaceableObject.transform.Rotate(-Vector3.up * rotationSpeed * Time.deltaTime);
+                    TutorialManager.Instance.AddObjectRotationTutorialStep();
                 }
                 else if (Input.GetKey(rotateRight))
                 {
                     currentPlaceableObject.transform.Rotate(Vector3.up * rotationSpeed * Time.deltaTime);
+                    TutorialManager.Instance.AddObjectRotationTutorialStep();
                 }
                 // currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
             }
@@ -140,7 +142,7 @@ namespace _Scripts
             if (Physics.Raycast(ray, out hitInfo))
             {
                 //Vector3 objectBounds = currentPlaceableObject.GetComponentInChildren<Renderer>().bounds.max;
-                currentPlaceableObject.transform.position = new Vector3(hitInfo.point.x, 0.5f, hitInfo.point.z);
+                currentPlaceableObject.transform.position = new Vector3(hitInfo.point.x, 0.2f, hitInfo.point.z);
 
                 // if (currentPlaceableObject.GetComponent<PlacingState>().placeable)
                 //     currentPlaceableObject.transform.rotation = Quaternion.FromToRotation(Vector3.up, hitInfo.normal);

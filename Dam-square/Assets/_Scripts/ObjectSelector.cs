@@ -20,7 +20,8 @@ public class ObjectSelector : MonoBehaviour
 
     public void OnClick()
     {
-        ObjectPlacer.instance.HandleNewObject(placeableObject.prefab);
+        TutorialManager.Instance.AddObjectSelectorClickTutorialStep();
+        ObjectPlacer.Instance.HandleNewObject(placeableObject.prefab);
         tooltipTrigger.HideTooltip();
     }
 }
