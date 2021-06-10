@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 7291926898841165179}
   - component: {fileID: 2287019437577439111}
   m_Layer: 2
-  m_Name: Drinkfontein
+  m_Name: Drinking fontain
   m_TagString: Placeable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

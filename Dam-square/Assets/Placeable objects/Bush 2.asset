@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bush 2
   m_EditorClassIdentifier: 
   category: 6
-  name: Struik 2
+  dutchName: Bosje 2
+  englishName: Bush 2
   thumbnail: {fileID: 21300000, guid: 4332c81c625662f4a9b4c9a1866ce666, type: 3}
   prefab: {fileID: 5620531897629410093, guid: 79c73233713ca41eba0925b7307a4760, type: 3}

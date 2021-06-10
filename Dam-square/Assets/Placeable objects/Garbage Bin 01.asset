@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Garbage Bin 01
   m_EditorClassIdentifier: 
   category: 5
-  name: Afvalbak 1
+  dutchName: Afvalbakken 1
+  englishName: Garbage bin 1
   thumbnail: {fileID: 21300000, guid: daeb2327fe937bc4880267f37ba9aad0, type: 3}
   prefab: {fileID: 8878796922642013077, guid: f6a0dbb0fe631ab4a8833bc7e8d9d887, type: 3}

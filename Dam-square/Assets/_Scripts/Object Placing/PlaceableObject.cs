@@ -6,7 +6,8 @@ namespace _Scripts
     public class PlaceableObject : ScriptableObject
     {
         public ObjectCategory category;
-        public new string name;
+        public string dutchName;
+        public string englishName;
         public Sprite thumbnail;
         public GameObject prefab;
     }

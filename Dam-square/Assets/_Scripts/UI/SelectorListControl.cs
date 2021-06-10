@@ -19,7 +19,7 @@ public class SelectorListControl : MonoBehaviour
     private void Awake()
     {
         allObjectSelectors = new List<GameObject>();
-
+        
         for (int i = 0; i < placableObjects.Length; i++)
         {
             GameObject newObject = Instantiate(objectSelectorPrefab);

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bench 02
   m_EditorClassIdentifier: 
   category: 2
-  name: Bank 2
+  dutchName: Houten bank 2
+  englishName: Wooden bench 2
   thumbnail: {fileID: 21300000, guid: b64f4712f2c4dcb498aaf9bd7c8f64c8, type: 3}
   prefab: {fileID: 4838143453128524010, guid: b1009cca50798e042aad8b23afcf486c, type: 3}

@@ -48,6 +48,19 @@ namespace _Scripts.Localization
         
             // HUD
             NLDict.Add("START_TUTORIAL", "Start oefenscenario");
+            
+            // Tutorial
+            NLDict.Add("TUTORIAL_1", "Beweeg muis naar schermrand om te bewegen.");
+            NLDict.Add("TUTORIAL_2", "Houd rechtermuisknop ingedrukt en slepen om perspectief te draaien.");
+            NLDict.Add("TUTORIAL_3", "Gebruik muiswiel om in/uit te zoomen.");
+            NLDict.Add("TUTORIAL_4", "Klik 'ALL' onderaan het scherm.");
+            NLDict.Add("TUTORIAL_5", "Klik het eerst object.");
+            NLDict.Add("TUTORIAL_6", "Gebruik 'Z' of 'X' om object te draaien.");
+            NLDict.Add("TUTORIAL_7", "Plaats object in een groen (dropzone)");
+            NLDict.Add("TUTORIAL_8", "Klik op geplaatste object om te selecteren.");
+            NLDict.Add("TUTORIAL_9", "Druk op 'Delete' of 'Backspace' om geselecteerde object te verwijderen.");
+            NLDict.Add("NEXT", "Volgende");
+            NLDict.Add("FINISH", "Afronden");
         
             // Instructions
             NLDict.Add("INSTRUCTIONS", "Instructies");
@@ -58,7 +71,7 @@ namespace _Scripts.Localization
             NLDict.Add("ZOOM_IN_OUT", "Inzoomen/uitzoomen");
             NLDict.Add("ROTATE_OBJECT", "Draai object");
             NLDict.Add("DELETE_OBJECT", "Verwijder object");
-        
+            
             NLDict.Add("SUBMIT_DESIGN", "Verstuur ontwerp");
         
             NLDict.Add("PLAY", "Start");
@@ -87,6 +100,19 @@ namespace _Scripts.Localization
         
             // HUD
             ENDict.Add("START_TUTORIAL", "Start tutorial");
+            
+            // Tutorial
+            ENDict.Add("TUTORIAL_1", "Move mouse to border of screen.");
+            ENDict.Add("TUTORIAL_2", "Hold right mouse button and drag to change viewing angle.");
+            ENDict.Add("TUTORIAL_3", "Use scrollwheel to zoom in/out.");
+            ENDict.Add("TUTORIAL_4", "Click 'ALL' at bottom of screen.");
+            ENDict.Add("TUTORIAL_5", "Click the first object.");
+            ENDict.Add("TUTORIAL_6", "Use 'Z' or 'X' to rotate object.");
+            ENDict.Add("TUTORIAL_7", "Place object in green area (dropzone).");
+            ENDict.Add("TUTORIAL_8", "Click placed object to select it.");
+            ENDict.Add("TUTORIAL_9", "Press 'delete' or 'backspace' to delete selected object.");
+            ENDict.Add("NEXT", "Next");
+            ENDict.Add("FINISH", "Finish");
         
             // Instructions
             ENDict.Add("INSTRUCTIONS", "Instructions");
@@ -97,7 +123,7 @@ namespace _Scripts.Localization
             ENDict.Add("ZOOM_IN_OUT", "Zoom in/out");
             ENDict.Add("ROTATE_OBJECT", "Rotate object");
             ENDict.Add("DELETE_OBJECT", "Delete object");
-        
+
             ENDict.Add("SUBMIT_DESIGN", "Submit design");
         
             // Menutext

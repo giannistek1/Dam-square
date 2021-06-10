@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2144149318302676120
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2144149318302676122}
+  - component: {fileID: 2144149318302676121}
+  m_Layer: 0
+  m_Name: GameState
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2144149318302676122
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144149318302676120}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2144149318302676121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144149318302676120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da869e58e45fb6444af1aab5a571e5af, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManagers:
+    clientConfigurationManagerClass: {fileID: 270513969832095708, guid: a1359d85ec4361344b32b449a9123090, type: 3}
+    GUIManagerClass: {fileID: 6197861709762106064, guid: bb14324331389a149ae49ec828a2ca98, type: 3}
+    localizationManagerClass: {fileID: 4327408245914581026, guid: 022cf724e3ebd744aaec17995e19b54f, type: 3}
+    objectPlacerClass: {fileID: 695482675167026053, guid: 7c3f7dad11074f94baaf553e0e52f875, type: 3}
+    dialogueManagerClass: {fileID: 6984796664167628884, guid: 7ac09a370c472434caf5fa9bab6c1055, type: 3}
+    tutorialManagerClass: {fileID: 7517916334733906712, guid: 2d13fc2788e2af7489a263b57bcb1737, type: 3}
+  mainCamera: {fileID: 1451751097045864929, guid: aaa07c8fa8aeca349844e7d77dff834a, type: 3}
+  playerIsMoving: 0
+  isRotatingCamera: 0

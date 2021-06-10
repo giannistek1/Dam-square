@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bench 04
   m_EditorClassIdentifier: 
   category: 2
-  name: Bank 4
+  dutchName: Ligstoel
+  englishName: Deck chair
   thumbnail: {fileID: 21300000, guid: 3469debae4661c845bcc01412bc6da96, type: 3}
   prefab: {fileID: 3070230172472061502, guid: 03d68701127779544aee8a18a6da624a, type: 3}

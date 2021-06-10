@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bike Rack 01
   m_EditorClassIdentifier: 
   category: 0
-  name: Fietsenrek 1
+  dutchName: Fietsenrek 1
+  englishName: Bike rack 1
   thumbnail: {fileID: 21300000, guid: 02a314789ce95144fbbe0b5204bbb150, type: 3}
   prefab: {fileID: 9112768500784710640, guid: 1e450912e4fa1c844966227154f189de, type: 3}

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tree S
   m_EditorClassIdentifier: 
   category: 6
-  name: Boom klein
+  dutchName: Boom klein
+  englishName: Tree small
   thumbnail: {fileID: 21300000, guid: a2564c8c5fec81842a622639e0c61c6b, type: 3}
   prefab: {fileID: 4350957608326395331, guid: 67275e7770603476facbb9c5f0d52fe5, type: 3}

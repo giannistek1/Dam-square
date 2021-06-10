@@ -1,7 +1,9 @@
+using System;
+using _Scripts.UI;
 using TMPro;
 using UnityEngine;
 
-namespace _Scripts
+namespace _Scripts.Object_Placing
 {
     public class ObjectPlacer : MonoBehaviour
     {
@@ -14,11 +16,13 @@ namespace _Scripts
         #endregion
 
         public GameObject currentPlaceableObject;
-        public GameObject bottomNavigation;
-        public TextMeshProUGUI feedbackText;
-        private LTDescr delay;
+        public GameObject objectContainerClass;
+        public HUD hud;
 
-        [SerializeField] private bool rotateFromMouseWheel;
+        private GameObject bottomNavigation;
+        private TextMeshProUGUI feedbackText;
+        private LTDescr delay;
+        
         [SerializeField] private bool rotateFromKeybindings;
         [SerializeField] private KeyCode rotateLeft;
         [SerializeField] private KeyCode rotateRight;
@@ -30,14 +34,24 @@ namespace _Scripts
 
         private void Awake()
         {
-            if (instance != null)
+            #region Singleton
+            if (instance != null && instance != this)
             {
                 Destroy(this.gameObject);
-            }
-            else
-            {
+            } else {
                 instance = this;
             }
+            #endregion
+        }
+
+        private void Start()
+        {
+            bottomNavigation = hud.bottomNavigation;
+            feedbackText = hud.feedbackText;
+            
+            // Create object container
+            GameObject objectContainer = Instantiate(objectContainerClass);
+            container = objectContainer.transform;
         }
 
         void Update()
@@ -65,7 +79,6 @@ namespace _Scripts
             if (currentPlaceableObject != null)
             {
                 MoveCurrentObjectToMouse();
-                RotateFromMouseWheel();
                 RotateFromKeybindings();
             }
         }
@@ -115,15 +128,6 @@ namespace _Scripts
 
             currentPlaceableObject.gameObject.layer = LayerMask.NameToLayer("Ignore Raycast");
             TutorialManager.Instance.AddObjectSelectionTutorialStep();
-        }
-
-        private void RotateFromMouseWheel()
-        {
-            if (rotateFromMouseWheel)
-            {
-                mouseWheelRotation += Input.mouseScrollDelta.y;
-                currentPlaceableObject.transform.Rotate(Vector3.up, mouseWheelRotation * 10f);
-            }
         }
 
         private void RotateFromKeybindings()

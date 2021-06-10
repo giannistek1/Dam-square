@@ -1,15 +1,17 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Scripts.UI;
 using TMPro;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
     #region Fields
-    public TextMeshProUGUI dialogueText;
-
-    public Animator animator;
+    public HUD hud;
+    
+    private TextMeshProUGUI dialogueText;
+    private Animator animator;
     
     private Queue<string> sentences;
         
@@ -35,6 +37,10 @@ public class DialogueManager : MonoBehaviour
 
     private void Start()
     {
+        dialogueText = hud.dialogueText.GetComponent<TextMeshProUGUI>();
+        
+        animator = hud.dialoguePanel.GetComponent<Animator>();
+
         sentences = new Queue<string>();
     }
     #endregion
@@ -42,7 +48,7 @@ public class DialogueManager : MonoBehaviour
     public void StartDialogue(Dialogue dialogue)
     {
         animator.SetBool("IsOpen", true);
-        
+
         sentences.Clear();
 
         // Add sentences to queue

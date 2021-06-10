@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Table 01
   m_EditorClassIdentifier: 
   category: 3
-  name: Tafel 1
+  dutchName: Parasoltafel
+  englishName: Parasoltable
   thumbnail: {fileID: 21300000, guid: 60f8d65a9b2c185419858362bbd818bd, type: 3}
   prefab: {fileID: 601270481454712612, guid: c6df3280a4cc81e4e9c5c0d5644375e8, type: 3}

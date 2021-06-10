@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Playground 01
   m_EditorClassIdentifier: 
   category: 4
-  name: Speeltoestel 1
+  dutchName: Speeltoestel
+  englishName: Playground
   thumbnail: {fileID: 21300000, guid: 52d62f402cc1dcf418ba4b8f328b8ca6, type: 3}
   prefab: {fileID: 3367318372799473969, guid: 150dac9e957876c4dada72aa872708db, type: 3}

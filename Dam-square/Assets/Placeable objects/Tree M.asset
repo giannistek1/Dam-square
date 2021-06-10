@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Tree M
   m_EditorClassIdentifier: 
   category: 6
-  name: Boom Gemiddeld
+  dutchName: Boom normaal
+  englishName: Tree medium
   thumbnail: {fileID: 21300000, guid: a2564c8c5fec81842a622639e0c61c6b, type: 3}
   prefab: {fileID: 4350957608326395331, guid: e19cd638e8874584f880238303b49ce5, type: 3}
