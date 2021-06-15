@@ -26,6 +26,7 @@ namespace _Scripts.Game
 		#region Fields
 		public GameObject mainCamera;
 		public HUD hud;
+		public bool isInTutorial = false;
 		public bool playerIsMoving = false;
 		public bool isRotatingCamera = false;
 
@@ -101,27 +102,6 @@ namespace _Scripts.Game
 		}
 		#endregion
 
-		/*private void CheckDraggingAction()
-	{
-		if (Input.GetMouseButtonDown(0))
-		{
-			startPos = Input.mousePosition;
-		} 
-		if (Input.GetMouseButton(0))
-		{ 
-			var offset = Input.mousePosition - startPos;
-			if (offset.magnitude > 5)
-			{
-				isDraggingCamera = true;
-			}
-		}
-
-		if (Input.GetMouseButtonUp(0))
-		{
-			isDraggingCamera = false;
-		}
-	}*/
-	
 		private void CheckCharMoved()
 		{
 			if (mainCamera.transform.position != lastPos)

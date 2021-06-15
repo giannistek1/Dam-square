@@ -13,14 +13,21 @@ namespace _Scripts.UI
 		public GameObject startTutorialGameObject;
 		public TextMeshProUGUI startTutorialText;
 		public GameObject controlsPanel;
+		
 		public Tutorial tutorial;
 		public Button nextButton;
 		public TextMeshProUGUI nextButtonText;
 		public GameObject dialoguePanel;
 		public GameObject dialogueText;
 		public TextMeshProUGUI feedbackText;
+		
+		public GameObject instructionsButton;
+		public GameObject settingsButton;
+		public GameObject deleteAllButton;
 		public GameObject bottomNavigation;
 		public GameObject scrollRect;
+		
+		public GameObject movementIndicators;
 		
 		private DialogueTrigger startTutorialDialogueTrigger;
 		#endregion

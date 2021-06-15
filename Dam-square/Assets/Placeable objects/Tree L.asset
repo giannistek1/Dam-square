@@ -15,5 +15,5 @@ MonoBehaviour:
   category: 6
   dutchName: Boom groot
   englishName: Tree large
-  thumbnail: {fileID: 21300000, guid: a2564c8c5fec81842a622639e0c61c6b, type: 3}
+  thumbnail: {fileID: 21300000, guid: 3acd4eec99379ca4db9f9cf7e69d1b47, type: 3}
   prefab: {fileID: 4350957608326395331, guid: 5e530f3b791b04c1d854548ea4892854, type: 3}

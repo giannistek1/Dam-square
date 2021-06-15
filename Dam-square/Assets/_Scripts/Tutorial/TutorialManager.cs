@@ -60,17 +60,23 @@ public class TutorialManager : MonoBehaviour
 		    }
 		    case 2: // Rotating
 		    {
+			    if (Input.mouseScrollDelta.y != 0 || Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.F))
+			    {
+				    tutorial.nextButton.gameObject.SetActive(true);
+			    } break;
+			    
+		    }
+		    case 3:	// Zooming
+		    {
 			    if (GameState.Instance.isRotatingCamera || Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.E))
 			    {
 				    tutorial.nextButton.gameObject.SetActive(true);
 			    } break;
 		    }
-		    case 3:	// Zooming
+		    case 11:
 		    {
-			    if (Input.mouseScrollDelta.y != 0 || Input.GetKeyDown(KeyCode.R) || Input.GetKeyDown(KeyCode.F))
-			    {
-				    tutorial.nextButton.gameObject.SetActive(true);
-			    } break;
+				FinishTutorial();
+			    break;
 		    }
 	    }
     }
@@ -78,67 +84,65 @@ public class TutorialManager : MonoBehaviour
     #endregion
 
     public void AddTutorialStep()
+    {
+		// Disable next button at start of steps
+		if (tutorialStep >= 0 && tutorialStep <= 3)
 		{
-			// Disable next button
-			if (tutorialStep >= 0 && tutorialStep <= 3)
-			{
-				hud.nextButton.gameObject.SetActive(false);
-			}
-		
-			// Start step
-			switch (tutorialStep)
-			{
-				case 0:
-				{
-					hud.bottomNavigation.SetActive(false);
-					hud.scrollRect.SetActive(false);
-					hud.controlsPanel.SetActive(false);
-					hud.startTutorialGameObject.SetActive(false);
-	    
-					hud.tutorial.gameObject.SetActive(true);
-					tutorial.rightMovementImage.gameObject.SetActive(true);
-					tutorial.leftMovementImage.gameObject.SetActive(true);
-					tutorial.upMovementImage.gameObject.SetActive(true);
-					tutorial.downMovementImage.gameObject.SetActive(true);
-					break;
-				}
-				case 1:
-				{
-					//movementImage.gameObject.SetActive(false);
-					tutorial.movementImage.gameObject.SetActive(false);
-					tutorial.rightMovementImage.gameObject.SetActive(false);
-					tutorial.leftMovementImage.gameObject.SetActive(false);
-					tutorial.upMovementImage.gameObject.SetActive(false);
-					tutorial.downMovementImage.gameObject.SetActive(false);
-					
-					tutorial.rotationImage.gameObject.SetActive(true);
-					break;
-				}
-				case 2:
-				{
-					tutorial.rotationImage.gameObject.SetActive(false);
-					tutorial.zoomImage.gameObject.SetActive(true);
-					break;
-				}
-				case 3:
-				{
-					tutorial.zoomImage.gameObject.SetActive(false);
-					hud.bottomNavigation.gameObject.SetActive(true);
-					tutorial.clickAllImage.gameObject.SetActive(true);
-					break;
-				}
-			}
-			tutorialStep++;
+			hud.nextButton.gameObject.SetActive(false);
 		}
+	
+		// Start step
+		switch (tutorialStep)
+		{
+			case 0:
+			{
+				GameState.Instance.isInTutorial = true;
+				hud.bottomNavigation.SetActive(false);
+				hud.scrollRect.SetActive(false);
+				hud.controlsPanel.GetComponent<CanvasGroup>().alpha = 0f;
+				hud.controlsPanel.SetActive(false);
+				hud.startTutorialGameObject.SetActive(false);
+				hud.instructionsButton.SetActive(false);
+				hud.settingsButton.SetActive(false);
+				hud.deleteAllButton.SetActive(false);
+    
+				hud.tutorial.gameObject.SetActive(true);
+				tutorial.movementTutorial.SetActive(true);
+				break;
+			}
+			case 1:
+			{
+				hud.movementIndicators.SetActive(false);
+				tutorial.movementTutorial.SetActive(false);
+
+				tutorial.zoomImage.SetActive(true);
+				break;
+			}
+			case 2:
+			{
+				tutorial.zoomImage.SetActive(false);
+				tutorial.rotationImage.SetActive(true);
+				break;
+			}
+			case 3:
+			{
+				tutorial.rotationImage.SetActive(false);
+				hud.bottomNavigation.SetActive(true);
+				tutorial.clickAllImage.SetActive(true);
+				break;
+			}
+		}
+		tutorialStep++;
+	}
 	
 		public void AddAllClickTutorialStep()
 		{
 			if (tutorialStep != 4) return;
 		
 			tutorialStep++;
-			tutorial.clickAllImage.gameObject.SetActive(false);
-			hud.scrollRect.gameObject.SetActive(true);
-			tutorial.clickObjectSelectorImage.gameObject.SetActive(true);
+			tutorial.clickAllImage.SetActive(false);
+			hud.scrollRect.SetActive(true);
+			tutorial.clickObjectSelectorImage.SetActive(true);
 			DialogueManager.Instance.DisplayNextSentence();
 		}
 	
@@ -147,7 +151,7 @@ public class TutorialManager : MonoBehaviour
 			if (tutorialStep != 5) return;
 		
 			tutorialStep++;
-			tutorial.clickObjectSelectorImage.gameObject.SetActive(false);
+			tutorial.clickObjectSelectorImage.SetActive(false);
 			DialogueManager.Instance.DisplayNextSentence();
 		}
 
@@ -156,7 +160,7 @@ public class TutorialManager : MonoBehaviour
 			if (tutorialStep != 6) return;
 		
 			tutorialStep++;
-			tutorial.clickObjectSelectorImage.gameObject.SetActive(false);
+			tutorial.clickObjectSelectorImage.SetActive(false);
 			MakeDropzonesBlink();
 			DialogueManager.Instance.DisplayNextSentence();
 
@@ -185,6 +189,21 @@ public class TutorialManager : MonoBehaviour
 			tutorialStep++;
 			tutorial.nextButton.gameObject.SetActive(true);
 			tutorial.nextButtonText.text = LocalizationManager.GetTextByKey("FINISH");
+		}
+
+		public void FinishTutorial()
+		{
+			GameState.Instance.isInTutorial = false;
+			hud.movementIndicators.SetActive(true);
+			hud.instructionsButton.SetActive(true);
+			//TODO: Could be different to be more efficient
+			hud.controlsPanel.GetComponent<CanvasGroup>().alpha = 0f;
+			hud.settingsButton.SetActive(true);
+			
+			//TODO: Can be faster if you use your own list
+			GameObject[] objects = GameObject.FindGameObjectsWithTag("Placeable");
+			if (objects.Length > 0)
+				hud.deleteAllButton.SetActive(true);
 		}
 		
 		public void MakeDropzonesBlink()

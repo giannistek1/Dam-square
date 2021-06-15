@@ -44,6 +44,13 @@ public class PlacingState : MonoBehaviour
             renderer.materials = canNotBePlacedMats;
             //Debug.Log(placeable);
         }
+        
+        else if (!placed && !withinObject && other.gameObject.CompareTag("Dropzone"))
+        {
+            OrbitalCameraController.Instance.StartMoveTowardsTarget(other.gameObject);
+            OrbitalCameraController.Instance.StartCloseZoomIn(other.gameObject);
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)

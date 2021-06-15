@@ -117,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f21121fea4ba43a4283ab00cb87d03ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  placeable: 1
+  placeable: 0
   placed: 0
   withinObject: 0
   collisionPoints:

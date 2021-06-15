@@ -1,4 +1,6 @@
 using System;
+using _Scripts.Game;
+using _Scripts.Localization;
 using _Scripts.UI;
 using TMPro;
 using UnityEngine;
@@ -14,7 +16,8 @@ namespace _Scripts.Object_Placing
             get { return instance; }
         }
         #endregion
-
+        
+        public Transform container;
         public GameObject currentPlaceableObject;
         public GameObject objectContainerClass;
         public HUD hud;
@@ -27,8 +30,6 @@ namespace _Scripts.Object_Placing
         [SerializeField] private KeyCode rotateLeft;
         [SerializeField] private KeyCode rotateRight;
         [SerializeField] private float rotationSpeed;
-
-        [SerializeField] private Transform container;
 
         float mouseWheelRotation;
 
@@ -66,11 +67,19 @@ namespace _Scripts.Object_Placing
                     Destroy(currentPlaceableObject);
                     bottomNavigation.SetActive(true);
                     TutorialManager.Instance.AddObjectDeletionTutorialStep();
+                    
+                    feedbackText.gameObject.SetActive(true);
+                    feedbackText.text = LocalizationManager.GetTextByKey("OBJECT_DELETED");
+                    feedbackText.color = Color.green;
+                    delay = LeanTween.delayedCall(2f, () =>
+                    {
+                        feedbackText.gameObject.SetActive(false);
+                    });
                 }
             }
             else
             {
-                HandleSelectExistingObject();
+                SelectExistingObject();
             }
         }
 
@@ -93,7 +102,10 @@ namespace _Scripts.Object_Placing
                 }
                 else
                 {
+                    //TODO: Disambiguate between dropzone/object feedback
                     feedbackText.gameObject.SetActive(true);
+                    feedbackText.text = LocalizationManager.GetTextByKey("CANT_PLACE_HERE");
+                    feedbackText.color = Color.red;
                     delay = LeanTween.delayedCall(2f, () =>
                     {
                         feedbackText.gameObject.SetActive(false);
@@ -112,13 +124,26 @@ namespace _Scripts.Object_Placing
 
             currentPlaceableObject.gameObject.layer = LayerMask.NameToLayer("Placeable");
             currentPlaceableObject.transform.SetParent(container);
-
+            
             currentPlaceableObject = null;
+            
+            feedbackText.gameObject.SetActive(true);
+            feedbackText.text = LocalizationManager.GetTextByKey("OBJECT_PLACED");
+            feedbackText.color = Color.green;
+            delay = LeanTween.delayedCall(2f, () =>
+            {
+                feedbackText.gameObject.SetActive(false);
+            });
+            
             bottomNavigation.SetActive(true);
+            
+            if (!GameState.Instance.isInTutorial)
+                hud.deleteAllButton.SetActive(true);
+            
             TutorialManager.Instance.AddDropzoneTutorialStep();
         }
 
-        private void MakeObjectPlaceable()
+        private void PickUpObject()
         {
             //print("Picking up object");
             currentPlaceableObject.GetComponent<PlacingState>().placed = false;
@@ -180,8 +205,9 @@ namespace _Scripts.Object_Placing
             }
         }
 
-        private void HandleSelectExistingObject()
+        private void SelectExistingObject()
         {
+            // Pick up object
             if (currentPlaceableObject == null)
             {
                 if (!Input.GetMouseButtonDown(0)) return;
@@ -195,7 +221,7 @@ namespace _Scripts.Object_Placing
                     if (hitInfo.collider.gameObject.CompareTag("Placeable"))
                     {
                         currentPlaceableObject = hitInfo.collider.gameObject;
-                        MakeObjectPlaceable();
+                        PickUpObject();
                     }
                 }
             }
@@ -203,11 +229,22 @@ namespace _Scripts.Object_Placing
     
         public void CleanScene()
         {
-            if (container.childCount > 0)
-                foreach (Transform child in container)
-                {
-                    Destroy(child.gameObject);
-                }
+            //TODO: Can be faster if you use your own list
+            GameObject[] objects = GameObject.FindGameObjectsWithTag("Placeable");
+            
+            foreach (GameObject obj in objects)
+            {
+                Destroy(obj);
+            }
+            hud.deleteAllButton.SetActive(false);
+            
+            feedbackText.gameObject.SetActive(true);
+            feedbackText.text = LocalizationManager.GetTextByKey("DELETED_ALL_OBJECTS");
+            feedbackText.color = Color.green;
+            delay = LeanTween.delayedCall(2f, () =>
+            {
+                feedbackText.gameObject.SetActive(false);
+            });
         }
 
         private void OnDestroy()

@@ -161,14 +161,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTransform: {fileID: 1451751096798515585}
-  normalSpeed: 0.2
+  rightIndicator: {fileID: 0}
+  leftIndicator: {fileID: 0}
+  topIndicator: {fileID: 0}
+  bottomIndicator: {fileID: 0}
+  normalSpeed: 0.1
   fastSpeed: 1
-  movementSpeed: 0.2
-  movementTime: 4
-  borderPadding: 8
-  minX: -85
+  movementSpeed: 0.1
+  movementTime: 3
+  borderPadding: 20
+  minX: -65
   maxX: 0
-  minZ: 60
+  minZ: 75
   maxZ: 135
   rotationAmount: 1
   zoomAmount: {x: 0, y: -0.2, z: 0.2}
@@ -177,7 +181,5 @@ MonoBehaviour:
   newPosition: {x: 0, y: 0, z: 0}
   newRotation: {x: 0, y: 0, z: 0, w: 0}
   newZoom: {x: 0, y: 0, z: 0}
-  dragStartPosition: {x: 0, y: 0, z: 0}
-  dragCurrentPosition: {x: 0, y: 0, z: 0}
   rotateStartPosition: {x: 0, y: 0, z: 0}
   rotateCurrentPosition: {x: 0, y: 0, z: 0}

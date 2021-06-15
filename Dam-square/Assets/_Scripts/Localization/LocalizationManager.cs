@@ -51,12 +51,12 @@ namespace _Scripts.Localization
             
             // Tutorial
             NLDict.Add("TUTORIAL_1", "Beweeg muis naar schermrand om te bewegen.");
-            NLDict.Add("TUTORIAL_2", "Houd rechtermuisknop ingedrukt en slepen om perspectief te draaien.");
-            NLDict.Add("TUTORIAL_3", "Gebruik muiswiel om in/uit te zoomen.");
+            NLDict.Add("TUTORIAL_2", "Gebruik muiswiel om in/uit te zoomen.");
+            NLDict.Add("TUTORIAL_3", "Houd rechtermuisknop ingedrukt en sleep om te draaien.");
             NLDict.Add("TUTORIAL_4", "Klik 'ALL' onderaan het scherm.");
-            NLDict.Add("TUTORIAL_5", "Klik het eerst object.");
+            NLDict.Add("TUTORIAL_5", "Klik het eerste object boven 'ALL'.");
             NLDict.Add("TUTORIAL_6", "Gebruik 'Z' of 'X' om object te draaien.");
-            NLDict.Add("TUTORIAL_7", "Plaats object in een groen (dropzone)");
+            NLDict.Add("TUTORIAL_7", "Plaats object in een groen gebied (dropzone)");
             NLDict.Add("TUTORIAL_8", "Klik op geplaatste object om te selecteren.");
             NLDict.Add("TUTORIAL_9", "Druk op 'Delete' of 'Backspace' om geselecteerde object te verwijderen.");
             NLDict.Add("NEXT", "Volgende");
@@ -64,26 +64,45 @@ namespace _Scripts.Localization
         
             // Instructions
             NLDict.Add("INSTRUCTIONS", "Instructies");
-            NLDict.Add("INSTRUCTIONS_1", "Bewegen \nInzoomen/uitzoomen \nDraaien \n\nPlaats object \nAnnuleer objectplaatsing \nPak object op \nObject rechts draaien \nObject links draaien \n Object verwijderen");
-            NLDict.Add("INSTRUCTIONS_2", "Muis op schermrand \nScrollwiel \nRMK + slepen \n\nLMK \nEsc \nLMK \nZ \nX \nDelete / Backspace");
             NLDict.Add("MOVE", "Bewegen");
+            NLDict.Add("ZOOM", "Inzoomen/uitzoomen");
             NLDict.Add("ROTATE", "Draaien");
-            NLDict.Add("ZOOM_IN_OUT", "Inzoomen/uitzoomen");
+            NLDict.Add("PLACE_SELECT_OBJECT", "Plaats/selecteer object");
+            NLDict.Add("CANCEL_PLACEMENT", "Annuleer plaatsen");
             NLDict.Add("ROTATE_OBJECT", "Draai object");
             NLDict.Add("DELETE_OBJECT", "Verwijder object");
+            NLDict.Add("MOUSE_TO_SCREENBORDER", "Muis naar schermrand");
+            NLDict.Add("HOLD_AND_DRAG", "Ingedrukt + slepen");
             
+            // Feedback
+            NLDict.Add("OBJECT_PLACED", "Object geplaatst");
+            NLDict.Add("OBJECT_DELETED", "Geselecteerde object verwijderd");
+            NLDict.Add("CANT_PLACE_HERE", "Kan object niet hier plaatsen. Plaats in een geldig gebied");
+            NLDict.Add("DELETED_ALL_OBJECTS", "Alle objecten succesvol verwijderd");
+            NLDict.Add("CANT_PLACE_HERE_DROPZONE", "Kan object niet hier plaatsen. Plaats object in een groen vlak!");
+            NLDict.Add("CANT_PLACE_HERE_OBJECT", "Object staat in de weg.");
+            NLDict.Add("GOOD_JOB", "Goed gedaan!");
+
             NLDict.Add("SUBMIT_DESIGN", "Verstuur ontwerp");
         
             NLDict.Add("PLAY", "Start");
-            NLDict.Add("LEVEL", "Level");
+            NLDict.Add("SETTINGS", "Instellingen");
             NLDict.Add("OPTIONS", "Opties");
+            NLDict.Add("LANGUAGE", "Taal");
+            NLDict.Add("DUTCH", "Nederlands");
+            NLDict.Add("ENGLISH_US", "Engels (Amerikaans)");
+            NLDict.Add("ENGLISH_UK", "Engels (Brits)");
             NLDict.Add("MUSIC", "Muziek");
             NLDict.Add("SOUND", "Geluid");
             NLDict.Add("RETURN", "Terug");
             NLDict.Add("ON", "AAN");
             NLDict.Add("OFF", "UIT");
+            NLDict.Add("DELETE_ALL_POPUP", "Weet u zeker dat u alle geplaatste objecten wilt verwijderen?");
+            NLDict.Add("YES", "Ja");
+            NLDict.Add("NO", "Nee");
             NLDict.Add("LOADING", "Laden...");
             NLDict.Add("LOGOUT", "Log uit");
+            NLDict.Add("CLOSE", "Sluiten");
             NLDict.Add("VERSION", "Versie");
             NLDict.Add("COMPLETED", "Behaald");
             NLDict.Add("NOT_COMPLETED", "Niet behaald");
@@ -103,8 +122,8 @@ namespace _Scripts.Localization
             
             // Tutorial
             ENDict.Add("TUTORIAL_1", "Move mouse to border of screen.");
-            ENDict.Add("TUTORIAL_2", "Hold right mouse button and drag to change viewing angle.");
-            ENDict.Add("TUTORIAL_3", "Use scrollwheel to zoom in/out.");
+            ENDict.Add("TUTORIAL_2", "Use scrollwheel to zoom in/out.");
+            ENDict.Add("TUTORIAL_3", "Hold right mouse button and drag to change viewing angle.");
             ENDict.Add("TUTORIAL_4", "Click 'ALL' at bottom of screen.");
             ENDict.Add("TUTORIAL_5", "Click the first object.");
             ENDict.Add("TUTORIAL_6", "Use 'Z' or 'X' to rotate object.");
@@ -116,27 +135,46 @@ namespace _Scripts.Localization
         
             // Instructions
             ENDict.Add("INSTRUCTIONS", "Instructions");
-            ENDict.Add("INSTRUCTIONS_1", "Move \nZoom in/out \nRotate \n\nPlace object \nCancel objectplacement \nPick up object \nSpin object right \nSpin object left\n Delete object");
-            ENDict.Add("INSTRUCTIONS_2", "Mouse to screenborder \nScrollwheel \nHold RMB + drag \n\nPress LMB \nEsc \nPress LMB \nZ \nX \nDelete / Backspace");
             ENDict.Add("MOVE", "Move");
+            ENDict.Add("ZOOM", "Zoom in/out");
             ENDict.Add("ROTATE", "Rotate");
-            ENDict.Add("ZOOM_IN_OUT", "Zoom in/out");
+            ENDict.Add("PLACE_SELECT_OBJECT", "Place/select object");
+            ENDict.Add("CANCEL_PLACEMENT", "Cancel placement");
             ENDict.Add("ROTATE_OBJECT", "Rotate object");
             ENDict.Add("DELETE_OBJECT", "Delete object");
+            ENDict.Add("MOUSE_TO_SCREENBORDER", "Mouse to screenborder");
+            ENDict.Add("HOLD_AND_DRAG", "Hold + drag");
 
+            // Feedback
+            ENDict.Add("OBJECT_PLACED", "Object placed");
+            ENDict.Add("OBJECT_DELETED", "Succesfully deleted selected object");
+            ENDict.Add("DELETED_ALL_OBJECTS", "Succesfully deleted all placed objects");
+            ENDict.Add("CANT_PLACE_HERE", "Can't place object here. Place object in valid area");
+            ENDict.Add("CANT_PLACE_HERE_DROPZONE", "Can't place object here. Place object in green area.");
+            ENDict.Add("CANT_PLACE_HERE_OBJECT", "Object is in the way!");
+            ENDict.Add("GOOD_JOB", "Good job!");
+            
             ENDict.Add("SUBMIT_DESIGN", "Submit design");
         
             // Menutext
             ENDict.Add("PLAY", "Play");
-            ENDict.Add("LEVEL", "Level");
+            ENDict.Add("SETTINGS", "Settings");
             ENDict.Add("OPTIONS", "Options");
+            ENDict.Add("LANGUAGE", "Language");
+            ENDict.Add("DUTCH", "Dutch");
+            ENDict.Add("ENGLISH_US", "English (US)");
+            ENDict.Add("ENGLISH_UK", "English (UK)");
             ENDict.Add("MUSIC", "Music");
             ENDict.Add("SOUND", "Sound");
             ENDict.Add("ON", "ON");
             ENDict.Add("OFF", "OFF");
+            ENDict.Add("DELETE_ALL_POPUP", "Are you sure you want to delete all placed objects?");
+            ENDict.Add("YES", "Yes");
+            ENDict.Add("NO", "No");
             ENDict.Add("RETURN", "Return");
             ENDict.Add("LOADING", "Loading...");
             ENDict.Add("LOGOUT", "Logout");
+            ENDict.Add("CLOSE", "Close");
             ENDict.Add("VERSION", "Version");
             ENDict.Add("COMPLETED", "Completed");
             ENDict.Add("NOT_COMPLETED", "Not completed");

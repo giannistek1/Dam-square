@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Debug = System.Diagnostics.Debug;
@@ -7,7 +9,12 @@ using Debug = System.Diagnostics.Debug;
 public class OrbitalCameraController : MonoBehaviour
 {
     public Transform cameraTransform;
-
+    [Header("Object references")]
+    public GameObject rightIndicator;
+    public GameObject leftIndicator;
+    public GameObject topIndicator;
+    public GameObject bottomIndicator;
+    
     [Header("Movement")]
     public float normalSpeed = 0.5f;
     public float fastSpeed = 1f;
@@ -29,11 +36,31 @@ public class OrbitalCameraController : MonoBehaviour
     public Vector3 newPosition;
     public Quaternion newRotation;
     public Vector3 newZoom;
-
-    public Vector3 dragStartPosition;
-    public Vector3 dragCurrentPosition;
+    
     public Vector3 rotateStartPosition;
     public Vector3 rotateCurrentPosition;
+    
+    private bool crRunning = false;
+    
+    #region Singleton
+    private static OrbitalCameraController instance;
+    public static OrbitalCameraController Instance
+    {
+        get { return instance; }
+    }
+    #endregion
+
+    private void Awake()
+    {
+        #region Singleton
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+        } else {
+            instance = this;
+        }
+        #endregion
+    }
 
     void Start()
     {
@@ -88,41 +115,6 @@ public class OrbitalCameraController : MonoBehaviour
         {
             newPosition += -transform.forward * movementSpeed;
         }
-        
-
-        // Dragging movement
-        /*if (Input.GetMouseButtonDown(0))
-        {
-            // Create plane to raycast on from camera to mouse and save that as startposition
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-            
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            float entry;
-
-            if (plane.Raycast(ray, out entry))
-            {
-                dragStartPosition = ray.GetPoint(entry);
-            }
-        }
-
-        // If LMB still held down
-        if (Input.GetMouseButton(0))
-        {
-            Plane plane = new Plane(Vector3.up, Vector3.zero);
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            float entry;
-
-            if (plane.Raycast(ray, out entry))
-            {
-                dragCurrentPosition = ray.GetPoint(entry);
-
-                // Current cam position + difference
-                newPosition = transform.position + dragStartPosition - dragCurrentPosition;
-            }
-        }*/
 
         // Dragging rotation
         if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(1))
@@ -137,7 +129,7 @@ public class OrbitalCameraController : MonoBehaviour
 
             rotateStartPosition = rotateCurrentPosition;
 
-            // -difference so you can drag the other way
+            // -difference so you drag the other way
             newRotation *= Quaternion.Euler(Vector3.up * (-difference.x / 5f));
         }
     }
@@ -180,9 +172,78 @@ public class OrbitalCameraController : MonoBehaviour
 
         // Limit x, z movement
         newPosition = new Vector3(Mathf.Clamp(newPosition.x, minX, maxX), newPosition.y, Mathf.Clamp(newPosition.z, minZ, maxZ));
+        CheckPosition();
+            
         // Apply movement, rotation, zoom
         transform.position = Vector3.Lerp(transform.position, newPosition, Time.deltaTime * movementTime);
         transform.rotation = Quaternion.Lerp(transform.rotation, newRotation, Time.deltaTime * movementTime);
         cameraTransform.localPosition = Vector3.Lerp(cameraTransform.localPosition, newZoom, Time.deltaTime * movementTime);
+    }
+
+    private void CheckPosition()
+    {
+        //TODO: More efficient since this gets called everytime
+        if (newPosition.x <= minX)
+            rightIndicator.SetActive(false);
+        else
+            rightIndicator.SetActive(true);
+        
+        if (newPosition.x >= maxX)
+            leftIndicator.SetActive(false);
+        else
+            leftIndicator.SetActive(true);
+        
+        if (newPosition.z >= maxZ)
+            bottomIndicator.SetActive(false);
+        else
+            bottomIndicator.SetActive(true);
+        
+        if (newPosition.z <= minZ)
+            topIndicator.SetActive(false);
+        else
+            topIndicator.SetActive(true);
+    }
+
+    public void StartMoveTowardsTarget(GameObject target)
+    {
+        StopAllCoroutines();
+        StartCoroutine(MoveTowardsTarget(target));
+    }
+    
+    public void StartCloseZoomIn(GameObject target)
+    {
+        StartCoroutine(ZoomInCoroutine(target));
+    }
+
+    IEnumerator MoveTowardsTarget(GameObject target)
+    {
+        while ((transform.position - target.transform.position).magnitude > 1f)
+        {
+            newPosition = target.transform.position;
+            yield return null;
+        }
+    }
+
+    IEnumerator ZoomInCoroutine(GameObject target)
+    {
+        
+        // Zoom
+        newZoom += zoomAmount * (1f * 0.5f);
+        if (newZoom.y < minZoom || newZoom.y > maxZoom)
+        {
+            newZoom -= zoomAmount * (1f * 0.5f);
+        }
+        
+        while(newZoom.y > minZoom)
+        {
+            newZoom += zoomAmount * (1f * 0.5f);
+
+            yield return null;
+        }
+        
+        if (newZoom.y < minZoom || newZoom.y > maxZoom)
+        {
+            newZoom -= zoomAmount * (1f * 0.5f);
+        }
     }
 }
