@@ -98,7 +98,11 @@ public class PlacingState : MonoBehaviour
 
             renderer.materials = standardMaterials;
         }
+    }
 
+    public void SetStandardMaterials()
+    {
+        renderer.materials = standardMaterials;
     }
     
     void OnMouseEnter() {

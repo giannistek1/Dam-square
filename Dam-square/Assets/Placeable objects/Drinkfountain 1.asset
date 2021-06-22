@@ -15,5 +15,6 @@ MonoBehaviour:
   category: 1
   dutchName: Drinkfontein
   englishName: Drinking fountain
+  objectCode: AAJ
   thumbnail: {fileID: 21300000, guid: 5a43148d631776445a145dc3c6b093e6, type: 3}
   prefab: {fileID: 7162457525397530902, guid: 3ed9fb63bf70bcf4fa065e47c7551bdd, type: 3}

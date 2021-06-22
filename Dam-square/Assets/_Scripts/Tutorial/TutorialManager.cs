@@ -85,7 +85,9 @@ public class TutorialManager : MonoBehaviour
 
     public void AddTutorialStep()
     {
-		// Disable next button at start of steps
+		SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+	    
+	    // Disable next button at start of steps
 		if (tutorialStep >= 0 && tutorialStep <= 3)
 		{
 			hud.nextButton.gameObject.SetActive(false);
@@ -96,6 +98,7 @@ public class TutorialManager : MonoBehaviour
 		{
 			case 0:
 			{
+				// Starting tutorial
 				GameState.Instance.isInTutorial = true;
 				hud.bottomNavigation.SetActive(false);
 				hud.scrollRect.SetActive(false);
@@ -105,6 +108,7 @@ public class TutorialManager : MonoBehaviour
 				hud.instructionsButton.SetActive(false);
 				hud.settingsButton.SetActive(false);
 				hud.deleteAllButton.SetActive(false);
+				hud.submitDesignButton.SetActive(false);
     
 				hud.tutorial.gameObject.SetActive(true);
 				tutorial.movementTutorial.SetActive(true);
@@ -193,6 +197,8 @@ public class TutorialManager : MonoBehaviour
 
 		public void FinishTutorial()
 		{
+			SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+			
 			GameState.Instance.isInTutorial = false;
 			hud.movementIndicators.SetActive(true);
 			hud.instructionsButton.SetActive(true);

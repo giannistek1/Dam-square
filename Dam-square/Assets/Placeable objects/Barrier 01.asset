@@ -15,5 +15,6 @@ MonoBehaviour:
   category: 0
   dutchName: "Barri\xEBre1"
   englishName: Barrier 1
+  objectCode: AAA
   thumbnail: {fileID: 21300000, guid: 010dcb2b9ecae57429179850f1729c2f, type: 3}
   prefab: {fileID: 1382436549974190099, guid: 236c4fecfca94b644bc5bc2138a6e44d, type: 3}

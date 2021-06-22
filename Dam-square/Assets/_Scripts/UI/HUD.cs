@@ -26,6 +26,7 @@ namespace _Scripts.UI
 		public GameObject deleteAllButton;
 		public GameObject bottomNavigation;
 		public GameObject scrollRect;
+		public GameObject submitDesignButton;
 		
 		public GameObject movementIndicators;
 		
@@ -61,5 +62,10 @@ namespace _Scripts.UI
 		}
 
 		#endregion
+
+		public void PlayButtonClickSound()
+		{
+			SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+		}
 	}
 }

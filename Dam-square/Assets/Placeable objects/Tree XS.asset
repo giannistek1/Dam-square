@@ -15,5 +15,6 @@ MonoBehaviour:
   category: 6
   dutchName: Boom extra klein
   englishName: ' Tree extra small'
+  objectCode: AAS
   thumbnail: {fileID: 21300000, guid: 82ee13c6f86932b43952d9ca68135309, type: 3}
   prefab: {fileID: 4350957608326395331, guid: 25b9246003beb48e3a81d97076e22452, type: 3}

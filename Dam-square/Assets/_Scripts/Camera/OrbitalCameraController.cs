@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
+using _Scripts.Game;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using Debug = System.Diagnostics.Debug;
@@ -71,15 +72,27 @@ public class OrbitalCameraController : MonoBehaviour
 
     void Update()
     {
-        if (!EventSystem.current.IsPointerOverGameObject())
+        if (GameState.Instance.hasLoggedIn)
         {
-            HandleMouseInput();
+            if (!EventSystem.current.IsPointerOverGameObject())
+            {
+                HandleMouseInput();
+            }
+                
+            HandleKeyboardInput();  
         }
-            
-        HandleMovementInput();    
     }
 
     void HandleMouseInput()
+    {
+        HandleMouseZoom();
+
+        HandleMouseMovement();
+
+        HandleMouseRotation();
+    }
+
+    private void HandleMouseZoom()
     {
         // Zoom
         if (Input.mouseScrollDelta.y != 0)
@@ -93,7 +106,10 @@ public class OrbitalCameraController : MonoBehaviour
                 newZoom -= zoomAmount * (Input.mouseScrollDelta.y * 10);
             }
         }
+    }
 
+    private void HandleMouseMovement()
+    {
         // Border movement
         // Right
         if (Input.mousePosition.x >= Screen.width - borderPadding)
@@ -115,7 +131,10 @@ public class OrbitalCameraController : MonoBehaviour
         {
             newPosition += -transform.forward * movementSpeed;
         }
+    }
 
+    private void HandleMouseRotation()
+    {
         // Dragging rotation
         if (Input.GetMouseButtonDown(2) || Input.GetMouseButtonDown(1))
         {
@@ -134,7 +153,7 @@ public class OrbitalCameraController : MonoBehaviour
         }
     }
 
-    void HandleMovementInput()
+    void HandleKeyboardInput()
     {
         // Change speed
         if (Input.GetKey(KeyCode.LeftShift))

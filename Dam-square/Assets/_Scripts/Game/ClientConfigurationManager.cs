@@ -47,6 +47,9 @@ namespace _Scripts
 			clientConfiguration.SawNewAchievement = true;
 
 			clientConfiguration.preferredLanguage = Language.English;
+			clientConfiguration.preferredEmail = "";
+			clientConfiguration.preferredName = "";
+			clientConfiguration.preferNameEmailSaved = false;
 
 			clientConfiguration.MusicOn = true;
 			clientConfiguration.SoundOn = true;

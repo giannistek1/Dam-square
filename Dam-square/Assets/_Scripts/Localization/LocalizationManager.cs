@@ -40,11 +40,17 @@ namespace _Scripts.Localization
         private static void UpdateDutchDictionaryStatic()
         {
             // Account
+            NLDict.Add("WELCOME", "Welkom!");
+            NLDict.Add("FILL_IN_NAME_AND_DATA", "Vul uw naam en e-mailadres in.");
             NLDict.Add("NAME", "Naam");
             NLDict.Add("EMAIL", "E-mail");
             NLDict.Add("LOGIN", "Log in");
             NLDict.Add("LOGGED_IN_AS", "Ingelogd als");
             NLDict.Add("PASSWORD", "Wachtwoord");
+            NLDict.Add("REMEMBER_ME", "Onthoud mij");
+            NLDict.Add("NAME_HAS_TO_BE_LONGER", "Naam hoort langer te zijn dan 3 karakters");
+            NLDict.Add("USE_VALID_EMAIL", "Gebruik een echt e-mailadres alstublieft");
+            NLDict.Add("GET_STARTED", "Start met ontwerpen");
         
             // HUD
             NLDict.Add("START_TUTORIAL", "Start oefenscenario");
@@ -59,6 +65,7 @@ namespace _Scripts.Localization
             NLDict.Add("TUTORIAL_7", "Plaats object in een groen gebied (dropzone)");
             NLDict.Add("TUTORIAL_8", "Klik op geplaatste object om te selecteren.");
             NLDict.Add("TUTORIAL_9", "Druk op 'Delete' of 'Backspace' om geselecteerde object te verwijderen.");
+            NLDict.Add("STOP_TUTORIAL", "Stop oefenscenario");
             NLDict.Add("NEXT", "Volgende");
             NLDict.Add("FINISH", "Afronden");
         
@@ -111,11 +118,17 @@ namespace _Scripts.Localization
         private static void UpdateEnglishDictionaryStatic()
         {
             // Account
+            ENDict.Add("WELCOME", "Welcome!");
+            ENDict.Add("FILL_IN_NAME_AND_EMAIL", "Please fill in your name and email.");
             ENDict.Add("NAME", "Name");
             ENDict.Add("EMAIL", "Email");
             ENDict.Add("PASSWORD", "Password");
             ENDict.Add("LOGIN", "Login");
             ENDict.Add("LOGGED_IN_AS", "Logged in as");
+            ENDict.Add("REMEMBER_ME", "Remember me");
+            ENDict.Add("NAME_HAS_TO_BE_LONGER", "Name has to be longer than 3 characters");
+            ENDict.Add("USE_VALID_EMAIL", "Please use a real email");
+            ENDict.Add("GET_STARTED", "Start designing");
         
             // HUD
             ENDict.Add("START_TUTORIAL", "Start tutorial");
@@ -130,6 +143,7 @@ namespace _Scripts.Localization
             ENDict.Add("TUTORIAL_7", "Place object in green area (dropzone).");
             ENDict.Add("TUTORIAL_8", "Click placed object to select it.");
             ENDict.Add("TUTORIAL_9", "Press 'delete' or 'backspace' to delete selected object.");
+            ENDict.Add("STOP_TUTORIAL", "Stop tutorial");
             ENDict.Add("NEXT", "Next");
             ENDict.Add("FINISH", "Finish");
         

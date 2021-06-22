@@ -16,7 +16,7 @@ namespace _Scripts.Game
 		//public ClientConfigurationManager clientConfigurationManagerClass;
 		public GUIManager GUIManagerClass;
 		//public LocalizationManager localizationManagerClass;
-		public ObjectPlacer objectPlacerClass;
+		//public ObjectPlacer objectPlacerClass;
 		//public DialogueManager dialogueManagerClass;
 		//public TutorialManager tutorialManagerClass;
 	}
@@ -26,9 +26,12 @@ namespace _Scripts.Game
 		#region Fields
 		public GameObject mainCamera;
 		public HUD hud;
+		public bool hasLoggedIn = false;
 		public bool isInTutorial = false;
 		public bool playerIsMoving = false;
 		public bool isRotatingCamera = false;
+		public string playerName = "";
+		public string playerEmail = "";
 
 		public List<GameObject> dropzones;
 		
@@ -67,7 +70,7 @@ namespace _Scripts.Game
 			//Assert.IsNotNull(gameManagers.clientConfigurationManagerClass);
 			Assert.IsNotNull(gameManagers.GUIManagerClass);
 			//Assert.IsNotNull(gameManagers.localizationManagerClass);
-			Assert.IsNotNull(gameManagers.objectPlacerClass);
+			//Assert.IsNotNull(gameManagers.objectPlacerClass);
 			//Assert.IsNotNull(gameManagers.dialogueManagerClass);
 			//Assert.IsNotNull(gameManagers.tutorialManagerClass);
 			//Assert.IsNotNull(backgroundSoundManager);
@@ -79,8 +82,8 @@ namespace _Scripts.Game
 			GUIManager guiManager = Instantiate(gameManagers.GUIManagerClass);
 			guiManager.hud = hud;
 			//LocalizationManager localizationManager = Instantiate(gameManagers.localizationManagerClass);
-			ObjectPlacer objectPlacer = Instantiate(gameManagers.objectPlacerClass);
-			objectPlacer.hud = hud;
+			//ObjectPlacer objectPlacer = Instantiate(gameManagers.objectPlacerClass);
+			//objectPlacer.hud = hud;
 			//DialogueManager dialogueManager = Instantiate(gameManagers.dialogueManagerClass);
 			//dialogueManager.hud = hud;
 			//TutorialManager tutorialManager = Instantiate(gameManagers.tutorialManagerClass);

@@ -15,5 +15,6 @@ MonoBehaviour:
   category: 6
   dutchName: Boom klein
   englishName: Tree small
+  objectCode: AAQ
   thumbnail: {fileID: 21300000, guid: 42299d1cf68b8b54fbd49e934a0ecdc4, type: 3}
   prefab: {fileID: 4350957608326395331, guid: 67275e7770603476facbb9c5f0d52fe5, type: 3}

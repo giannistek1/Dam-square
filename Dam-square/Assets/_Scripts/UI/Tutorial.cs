@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using _Scripts.Game;
+using _Scripts.Localization;
 using _Scripts.UI;
 using TMPro;
 using UnityEngine;
@@ -10,6 +12,7 @@ namespace _Scripts
 	public class Tutorial : MonoBehaviour
 	{
 		#region Fields
+		public TextMeshProUGUI stopTutorialButtonText;
 		public Button nextButton;
 		public TextMeshProUGUI nextButtonText;
 		
@@ -21,7 +24,12 @@ namespace _Scripts
 		#endregion
 
 		#region Unity Methods
-		
+
+		private void Update()
+		{
+			stopTutorialButtonText.text = LocalizationManager.GetTextByKey("STOP_TUTORIAL");
+		}
+
 		#endregion
 	}
 }

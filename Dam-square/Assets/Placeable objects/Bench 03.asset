@@ -15,5 +15,6 @@ MonoBehaviour:
   category: 2
   dutchName: Houten bank 3
   englishName: Wooden bench 3
+  objectCode: AAD
   thumbnail: {fileID: 21300000, guid: f693fc4f7d8b08a468cc891116d6bf25, type: 3}
   prefab: {fileID: 8566206684908130177, guid: d607547633158ba4787c0f57e2b39df7, type: 3}

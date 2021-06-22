@@ -32,6 +32,7 @@ public class SelectorListControl : MonoBehaviour
 
     public void Filter(ToggleButton toggleButton)
     {
+        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
         List<GameObject> newList = allObjectSelectors.Where(o => o.GetComponent<ObjectSelector>().placeableObject.category == toggleButton.objectCategory).ToList();
 
         HideAllSelectors();
@@ -53,6 +54,7 @@ public class SelectorListControl : MonoBehaviour
 
     public void ShowAllSelectors()
     {
+        SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
         for (int i = 0; i < allObjectSelectors.Count; i++)
         {
             allObjectSelectors[i].SetActive(true);

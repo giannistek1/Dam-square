@@ -15,5 +15,6 @@ MonoBehaviour:
   category: 6
   dutchName: Bosje 1
   englishName: Bush 1
+  objectCode: AAH
   thumbnail: {fileID: 21300000, guid: 65ffcb8761dbb5141996294f80aa8d42, type: 3}
   prefab: {fileID: 7496183962001630021, guid: f471c4344e4bc418fa46927e1b68a17f, type: 3}

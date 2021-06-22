@@ -7,6 +7,9 @@ public class ClientConfiguration
 	public bool SawNewAchievement;
 
 	public Language preferredLanguage;
+	public string preferredName;
+	public string preferredEmail;
+	public bool preferNameEmailSaved;
 
 	public bool MusicOn;
 	public bool SoundOn;

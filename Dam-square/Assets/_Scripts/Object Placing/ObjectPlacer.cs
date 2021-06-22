@@ -21,11 +21,13 @@ namespace _Scripts.Object_Placing
         public GameObject currentPlaceableObject;
         public GameObject objectContainerClass;
         public HUD hud;
+        public ParticleSystem smokeEffect;
 
         private GameObject bottomNavigation;
         private TextMeshProUGUI feedbackText;
         private LTDescr delay;
-        
+
+        private Vector3 previousObjectPosition;
         [SerializeField] private bool rotateFromKeybindings;
         [SerializeField] private KeyCode rotateLeft;
         [SerializeField] private KeyCode rotateRight;
@@ -76,6 +78,31 @@ namespace _Scripts.Object_Placing
                         feedbackText.gameObject.SetActive(false);
                     });
                 }
+                
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    SoundManager.PlaySound(SoundManager.Sound.ButtonClick);
+                    
+                    // Only destroy if you didn't click on it
+                    if(previousObjectPosition == new Vector3(999,999,999))
+                        Destroy(currentPlaceableObject);
+                    else
+                    {
+                        currentPlaceableObject.transform.position = previousObjectPosition;
+                        currentPlaceableObject.GetComponent<PlacingState>().SetStandardMaterials();
+                        ResetObject();
+                    }
+
+                    //feedbackText.gameObject.SetActive(true);
+                    //feedbackText.text = LocalizationManager.GetTextByKey("OBJECT_DELETED");
+                    //feedbackText.color = Color.red;
+                    //delay = LeanTween.delayedCall(2f, () =>
+                    //{
+                    //    feedbackText.gameObject.SetActive(false);
+                    //});
+                    
+                    bottomNavigation.SetActive(true);
+                }
             }
             else
             {
@@ -102,6 +129,8 @@ namespace _Scripts.Object_Placing
                 }
                 else
                 {
+                    SoundManager.PlaySound(SoundManager.Sound.ObjectCannotBePlaced);
+                    
                     //TODO: Disambiguate between dropzone/object feedback
                     feedbackText.gameObject.SetActive(true);
                     feedbackText.text = LocalizationManager.GetTextByKey("CANT_PLACE_HERE");
@@ -116,16 +145,13 @@ namespace _Scripts.Object_Placing
 
         private void PlaceObject()
         {
-            // Use reference instead of getcomponent to optimize
-            currentPlaceableObject.GetComponent<PlacingState>().placed = true;
-            currentPlaceableObject.GetComponent<Collider>().isTrigger = false;
-            currentPlaceableObject.GetComponent<Rigidbody>().isKinematic = false;
-            currentPlaceableObject.GetComponent<Rigidbody>().useGravity = true;
-
-            currentPlaceableObject.gameObject.layer = LayerMask.NameToLayer("Placeable");
-            currentPlaceableObject.transform.SetParent(container);
+            Vector3 particlePosition = currentPlaceableObject.GetComponent<Renderer>().bounds.center;
+            particlePosition.y = 0.05f;
+            smokeEffect.transform.position = particlePosition;
+            smokeEffect.Play();
+            SoundManager.PlaySound(SoundManager.Sound.ObjectPlaced);
             
-            currentPlaceableObject = null;
+            ResetObject();
             
             feedbackText.gameObject.SetActive(true);
             feedbackText.text = LocalizationManager.GetTextByKey("OBJECT_PLACED");
@@ -145,7 +171,8 @@ namespace _Scripts.Object_Placing
 
         private void PickUpObject()
         {
-            //print("Picking up object");
+            SoundManager.PlaySound(SoundManager.Sound.ObjectPickedUp);
+
             currentPlaceableObject.GetComponent<PlacingState>().placed = false;
             currentPlaceableObject.GetComponent<Collider>().isTrigger = true;
             currentPlaceableObject.GetComponent<Rigidbody>().isKinematic = true;
@@ -221,10 +248,26 @@ namespace _Scripts.Object_Placing
                     if (hitInfo.collider.gameObject.CompareTag("Placeable"))
                     {
                         currentPlaceableObject = hitInfo.collider.gameObject;
+                        previousObjectPosition = currentPlaceableObject.transform.position;
                         PickUpObject();
                     }
                 }
             }
+        }
+
+        private void ResetObject()
+        {
+            //TODO: Use reference instead of getcomponent to optimize
+            currentPlaceableObject.GetComponent<PlacingState>().placed = true;
+            currentPlaceableObject.GetComponent<Collider>().isTrigger = false;
+            currentPlaceableObject.GetComponent<Rigidbody>().isKinematic = false;
+            currentPlaceableObject.GetComponent<Rigidbody>().useGravity = true;
+
+            currentPlaceableObject.gameObject.layer = LayerMask.NameToLayer("Placeable");
+            currentPlaceableObject.transform.SetParent(container);
+            
+            currentPlaceableObject = null;
+            previousObjectPosition = new Vector3(999,999,999);
         }
     
         public void CleanScene()
